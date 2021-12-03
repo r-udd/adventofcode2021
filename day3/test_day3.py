@@ -18,31 +18,21 @@ def solve_a (numbers):
     return int(gamma, 2) * int(epsilon, 2)
 
 def solve_b(numbers):
-    index = 0
-    oxygen = numbers
-    while len(oxygen) > 1:
-        half = len(oxygen) / 2
-        summa = sum(map(lambda x: 1 if x[index] == '1' else 0, oxygen))
-        if summa >= half:
-            eq = '1'
-        else:
-            eq = '0'
-        oxygen = list(filter(lambda x: x[index] == eq, oxygen))
-        index += 1
+    def calc(numbers, bit1, bit2):
+        index = 0
+        oxygen = numbers
+        while len(oxygen) > 1:
+            half = len(oxygen) / 2
+            summa = sum(map(lambda x: 1 if x[index] == '1' else 0, oxygen))
+            if summa >= half:
+                eq = bit1
+            else:
+                eq = bit2
+            oxygen = list(filter(lambda x: x[index] == eq, oxygen))
+            index += 1
+        return int(oxygen[0], 2)
 
-    index = 0
-    co2 = numbers
-    while len(co2) > 1:
-        half = len(co2) / 2
-        summa = sum(map(lambda x: 1 if x[index] == '1' else 0, co2))
-        if summa >= half:
-            eq = '0'
-        else:
-            eq = '1'
-        co2 = list(filter(lambda x: x[index] == eq, co2))
-        index += 1
-
-    return int(oxygen[0], 2) * int(co2[0], 2)
+    return calc(numbers, '1', '0') * calc(numbers, '0', '1')
 
 def test_03a():
     assert solve_a(example) == 198
