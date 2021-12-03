@@ -18,7 +18,7 @@ def solve_a (numbers):
     return int(gamma, 2) * int(epsilon, 2)
 
 def solve_b(numbers):
-    return sum(map(lambda x: x[0] < x[1], zip(numbers, numbers[3:])))
+    return 0
 
 def test_03a():
     assert solve_a(example) == 198
